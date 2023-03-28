@@ -18,7 +18,7 @@ The third-party API being used previously has closed. So I wrote my own also for
 ```js
 fetch(`http://localhost:8080/products`)
 ```
-#### Query parametrs
+#### Query parametrs (can be used multiple)
 | Name | Description |
 | ----------- | ----------- |
 | searchQuery | Used to filter products by substring in its title. Case insensitive |
