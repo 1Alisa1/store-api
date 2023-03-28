@@ -5,13 +5,14 @@ class ProductService {
     let sqlQuery = `SELECT * FROM product`;
     const sqlValues = [];
 
-    if (categoryId) {
+    if (categoryId && searchQuery) {
+      sqlQuery += ` WHERE categoryId = $1 AND title ILIKE '%${searchQuery}%'`;
+      sqlValues.push(parseInt(categoryId));
+    } else if (searchQuery) {
+      sqlQuery += ` WHERE title ILIKE '%${searchQuery}%'`;
+    } else if (categoryId) {
       sqlQuery += ` WHERE categoryId = $1`;
       sqlValues.push(parseInt(categoryId));
-    }
-
-    if (searchQuery) {
-      sqlQuery += ` WHERE title ILIKE '%${searchQuery}%'`;
     }
 
     const products = await db.query(sqlQuery, sqlValues);
